@@ -47,7 +47,7 @@ Les images que j'ai utilisées ne viennent pas toutes de moi, mis appart l'herbe
 
 - Mon Favicon est fait avec Logomakr: https://logomakr.com/
 
-## Notes:
+## Note:
 
 Ce projet m'a permis d'acquérir une base avec le monde du développement du jeu vidéo, mais aussi du .NET et de Visual Studio. De ce fait je compte bien encore créer des petits jeux dans ce style.
 
