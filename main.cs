@@ -381,7 +381,7 @@ namespace DroneGame
             monsterPicture.Image = Properties.Resources.monster;
             monsterPicture.Tag = "Monster";
             monsterPicture.Left = randomNumber.Next(0, this.ClientSize.Width - 200);
-            monsterPicture.Top = 510;
+            monsterPicture.Top = 515;
 
             monsterList.Add(monsterPicture);
             this.Controls.Add(monsterPicture);
