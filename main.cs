@@ -1,5 +1,4 @@
 // Par Nathan Debilloëz.
-// Sapins: https://www.flaticon.com/free-icon/christmas-tree_3589529?term=pine%20tree&page=1&position=11&page=1&position=11&related_id=3589529&origin=search
 using System;
 using System.Collections.Generic;
 using System.Drawing;
