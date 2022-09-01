@@ -4,7 +4,7 @@ DroneGame est un simple jeu en 2D. Fait avec C# et Visual Studio.
 
 # Téléchargement:
 
-Vous pouvez directement cliquer ici: https://github.com/Nde-Code/DroneGame/releases/download/v1.0.1/DroneGame.exe
+Vous pouvez directement cliquer ici: https://github.com/Nde-Code/DroneGame/releases/download/1.0.0.0/DroneGame.exe
 
 > Votre antivirus va détecter le jeu comme malveillant car c'est un ".exe" non signé. Je vous recommande donc l'utilisation de "Windows Sandbox" (ou tout autre programme de machine virtuel) pour lancer le jeu si vous utilisez la version compilée (en .exe).
 
