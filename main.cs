@@ -1,0 +1,464 @@
+// Par Nathan Debilloëz.
+// Sapins: https://www.flaticon.com/free-icon/christmas-tree_3589529?term=pine%20tree&page=1&position=11&page=1&position=11&related_id=3589529&origin=search
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace DroneGame
+{
+    public partial class DroneGameWindow : Form
+    {
+
+        int playerPv = 100;
+        int batteryLevel = 100;
+        int playerSpeed = 10;
+        int stopSpawn = 0;
+        int batteryCount = 0;
+
+        int[] posXRandom = {
+            720,
+            40,
+            860,
+            300
+        };
+
+        int[] posYrandom = {
+            370,
+            137,
+            31,
+            261
+        };
+
+        int monsterSpeed = 5;
+
+        string direction;
+
+        bool right, left, up, down;
+        bool gameOver = false;
+
+        int scoreCounter = 0;
+
+        List<PictureBox> monsterList = new List<PictureBox>();
+
+        Random randomNumber = new Random();
+
+        public DroneGameWindow()
+        {
+            InitializeComponent();
+            injectMonster();
+            direction = "unknown";
+        }
+
+        private static void OnTimedEvent(Object source, System.Timers.ElapsedEventArgs e) => Console.WriteLine("The Elapsed event was raised at {0}", e.SignalTime);
+
+        private void Loading(object sender, EventArgs e) => Console.WriteLine("Le jeu est en cours de chargement...");
+
+        private void isDownKey(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Right)
+            {
+                right = true;
+                left = false;
+                up = false;
+                down = false;
+                direction = "right";
+            }
+            if (e.KeyCode == Keys.Left)
+            {
+                left = true;
+                right = false;
+                up = false;
+                down = false;
+                direction = "left";
+            }
+            if (e.KeyCode == Keys.Down)
+            {
+                left = false;
+                right = false;
+                up = false;
+                down = true;
+                direction = "down";
+            }
+            if (e.KeyCode == Keys.Up)
+            {
+                left = false;
+                right = false;
+                up = true;
+                down = false;
+                direction = "up";
+            }
+            if (e.KeyCode == Keys.Space && batteryLevel >= 30)
+            {
+                shootMonster();
+            }
+            if (gameOver == true && e.KeyCode == Keys.Enter)
+            {
+                replay();
+            }
+        }
+
+        private void spawnBattery()
+        {
+
+            int posRand = randomNumber.Next(0, 3);
+
+            int posChoiceX = posXRandom[posRand];
+            int posChoiceY = posYrandom[posRand];
+
+            PictureBox battery = new PictureBox();
+
+            battery.Image = Properties.Resources.accumulator;
+            battery.SizeMode = PictureBoxSizeMode.AutoSize;
+            battery.Location = new Point(posChoiceX, posChoiceY);
+            battery.Tag = "Battery";
+
+            this.Controls.Add(battery);
+
+        }
+
+        private void isUpKey(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Right)
+            {
+                right = false;
+                left = false;
+                up = false;
+                down = false;
+                direction = "unknown";
+            }
+            if (e.KeyCode == Keys.Left)
+            {
+                left = false;
+                right = false;
+                up = false;
+                down = false;
+                direction = "unknown";
+            }
+            if (e.KeyCode == Keys.Down)
+            {
+                left = false;
+                right = false;
+                up = false;
+                down = false;
+                direction = "unknown";
+            }
+            if (e.KeyCode == Keys.Up)
+            {
+                left = false;
+                right = false;
+                up = false;
+                down = false;
+                direction = "unknown";
+            }
+
+        }
+
+        private void shootMonster()
+        {
+            batteryLevel -= 5;
+            Projectiles projectiles = new Projectiles();
+            projectiles.projectilesLeft = Drone.Left + (Drone.Width / 2);
+            projectiles.projectilesHight = Drone.Top + (Drone.Height / 2);
+            projectiles.launch(this);
+        }
+
+        private void clockEvent(object sender, EventArgs e)
+        {
+            ScoreBar.Text = $"Score: {scoreCounter}";
+
+            if (scoreCounter < 0)
+            {
+                scoreCounter = 0;
+            }
+
+            if (batteryLevel > 1)
+            {
+                EnergyBar.Value = batteryLevel;
+            }
+
+            if (batteryLevel is 30 && batteryCount == 0)
+            {
+                playerSpeed = 6;
+                batteryCount = 1;
+                spawnBattery();
+            }
+
+            if (playerPv > 1)
+            {
+                HealthBar.Value = playerPv;
+            }
+            else
+            {
+                gameOver = true;
+                stopGame();
+            }
+
+            if (right == true && direction == "right" && Drone.Left + Drone.Width < this.ClientSize.Width)
+            {
+                Drone.Left += playerSpeed;
+            }
+
+            if (left == true && direction == "left" && Drone.Left > 0)
+            {
+                Drone.Left -= playerSpeed;
+            }
+
+            if (up == true && direction == "up" && Drone.Top > 0)
+            {
+                Drone.Top -= playerSpeed;
+            }
+
+            if (down == true && direction == "down" && Drone.Top + Drone.Width < this.ClientSize.Height - 58)
+            {
+                Drone.Top += playerSpeed;
+            }
+
+            if (Drone.Left == 100 && Drone.Top == this.ClientSize.Height + 50)
+            {
+                Drone.Location = new Point(478, 490);
+            }
+
+            foreach (Control entityBar in this.Controls)
+            {
+                if (entityBar is ProgressBar && (string)entityBar.Name == "EnergyBar" || entityBar is ProgressBar && (string)entityBar.Name == "HealthBar")
+                {
+                    if (Drone.Bounds.IntersectsWith(entityBar.Bounds))
+                    {
+                        Drone.Location = new Point(478, 490);
+                    }
+                }
+            }
+
+            foreach (Control entityText in this.Controls)
+            {
+                if (entityText is Label && (string)entityText.Name == "HealthTextBar" || entityText is Label && (string)entityText.Name == "EnergyTextBar" || entityText is Label && (string)entityText.Name == "ScoreBar")
+                {
+                    if (Drone.Bounds.IntersectsWith(entityText.Bounds))
+                    {
+                        Drone.Location = new Point(478, 490);
+                    }
+                }
+            }
+
+            foreach (Control entityBattery in this.Controls)
+            {
+                if (entityBattery is PictureBox && (string)entityBattery.Tag == "Battery")
+                {
+                    if (Drone.Bounds.IntersectsWith(entityBattery.Bounds))
+                    {
+                        batteryCount = 0;
+                        this.Controls.Remove(entityBattery);
+                        ((PictureBox)entityBattery).Dispose();
+                        batteryLevel = 100;
+                        playerSpeed = 10;
+                    }
+                }
+            }
+
+            foreach (Control entityText in this.Controls)
+            {
+                if (entityText is Label && (string)entityText.Name == "HealthTextBar" || entityText is Label && (string)entityText.Name == "EnergyTextBar" || entityText is Label && (string)entityText.Name == "ScoreBar")
+                {
+                    if (Drone.Bounds.IntersectsWith(entityText.Bounds))
+                    {
+                        Drone.Location = new Point(478, 490);
+                    }
+                }
+            }
+
+            foreach (Control entityPatern in this.Controls)
+            {
+                if (entityPatern is PictureBox && (string)entityPatern.Tag == "Patern")
+                {
+                    if (Drone.Bounds.IntersectsWith(entityPatern.Bounds))
+                    {
+                        Drone.Location = new Point(478, 490);
+                        playerPv -= 5;
+                    }
+                }
+            }
+
+            foreach (Control entityFlag in this.Controls)
+            {
+                if (entityFlag is PictureBox && (string)entityFlag.Tag == "finishFlag")
+                {
+                    if (Drone.Bounds.IntersectsWith(entityFlag.Bounds))
+                    {
+                        Drone.Location = new Point(478, 490);
+                        playerPv -= 5;
+                    }
+                }
+            }
+
+            foreach(Control entityPineTree in this.Controls)
+            {
+                if(entityPineTree is PictureBox && (string)entityPineTree.Tag == "pineTree")
+                {
+                    if (Drone.Bounds.IntersectsWith(entityPineTree.Bounds))
+                    {
+                        Drone.Location = new Point(478, 490);
+                        playerPv -= 5;
+                    }
+                }
+            }
+
+            foreach (Control entityProjectiles in this.Controls)
+            {
+
+                if (entityProjectiles is PictureBox && (string)entityProjectiles.Tag == "ProjectilesTag")
+                {
+                    foreach (Control entityMonster in this.Controls)
+                    {
+                        if (entityProjectiles is PictureBox && (string)entityProjectiles.Tag == "ProjectilesTag" && entityMonster is PictureBox && (string)entityMonster.Tag == "Monster")
+                        {
+                            if (entityProjectiles.Bounds.IntersectsWith(entityMonster.Bounds))
+                            {
+                                scoreCounter++;
+                                this.Controls.Remove(entityProjectiles);
+                                this.Controls.Remove(entityMonster);
+                                ((PictureBox)entityMonster).Dispose();
+                                ((PictureBox)entityProjectiles).Dispose();
+                                stopSpawn--;
+                                monsterList.Clear();
+                                injectMonster();
+                            }
+                        }
+                    }
+                }
+
+                if (entityProjectiles is PictureBox && (string)entityProjectiles.Tag == "Monster")
+                {
+                    entityProjectiles.Left += monsterSpeed;
+
+                    if (entityProjectiles.Left + entityProjectiles.Width > this.ClientSize.Width)
+                    {
+                        this.Controls.Remove(entityProjectiles);
+                        ((PictureBox)entityProjectiles).Dispose();
+                        monsterList.Clear();
+                        scoreCounter--;
+                        stopSpawn--;
+                        injectMonster();
+                    }
+
+                    if (Drone.Bounds.IntersectsWith(entityProjectiles.Bounds))
+                    {
+                        playerPv -= 5;
+                    }
+                }
+
+                if (entityProjectiles is PictureBox && (string)entityProjectiles.Tag == "ProjectilesTag")
+                {
+                    if (stoneBlockD.Bounds.IntersectsWith(entityProjectiles.Bounds) || stoneBlockB.Bounds.IntersectsWith(entityProjectiles.Bounds) || stoneBlockC.Bounds.IntersectsWith(entityProjectiles.Bounds) || stoneBlockA.Bounds.IntersectsWith(entityProjectiles.Bounds) || stoneBlockE.Bounds.IntersectsWith(entityProjectiles.Bounds))
+                    {
+                        this.Controls.Remove(entityProjectiles);
+                        ((PictureBox)entityProjectiles).Dispose();
+                    }
+                }
+
+            }
+        }
+
+        private void injectMonster()
+        {
+            if (stopSpawn > 2 && monsterList.Count < 3)
+            {
+                return;
+            }
+            else
+            {
+                for (int i = 0; i < 2; i++)
+                {
+                    spawnMonster();
+                }
+            }
+        }  
+
+        private void spawnMonster()
+        {
+            stopSpawn++;
+            PictureBox monsterPicture = new PictureBox();
+            monsterPicture.Image = Properties.Resources.monster;
+            monsterPicture.Tag = "Monster";
+            monsterPicture.Left = randomNumber.Next(0, this.ClientSize.Width - 200);
+            monsterPicture.Top = 510;
+
+            monsterList.Add(monsterPicture);
+            this.Controls.Add(monsterPicture);
+        }
+
+        private void PositionChecker(object sender, EventArgs e)
+        {
+            if (direction == "unknown")
+            {
+                playerPv -= 5;
+                scoreCounter -= 5;
+                Drone.Location = new Point(478, 490);
+            }
+        }
+
+        private void stopGame()
+        {
+
+            foreach (Control entityToRemoveOnGameOver in this.Controls)
+            {
+                if (entityToRemoveOnGameOver is PictureBox && (string)entityToRemoveOnGameOver.Tag == "Monster")
+                {
+                    this.Controls.Remove(entityToRemoveOnGameOver);
+                    ((PictureBox)entityToRemoveOnGameOver).Dispose();
+                    monsterList.Clear();
+                }
+                if (entityToRemoveOnGameOver is PictureBox && (string)entityToRemoveOnGameOver.Tag == "ProjectilesTag")
+                {
+                    this.Controls.Remove(entityToRemoveOnGameOver);
+                    ((PictureBox)entityToRemoveOnGameOver).Dispose();
+
+                }
+                if (entityToRemoveOnGameOver is PictureBox && (string)entityToRemoveOnGameOver.Tag == "Battery")
+                {
+                    this.Controls.Remove(entityToRemoveOnGameOver);
+                    ((PictureBox)entityToRemoveOnGameOver).Dispose();
+                }
+
+            }
+
+            HealthBar.Value = 0;
+
+            Drone.Image = Properties.Resources.tombstone;
+            Drone.Location = new Point(478, 505);
+            direction = "unknown";
+
+            PositionDetector.Stop();
+
+        }
+
+        private void replay()
+        {
+            gameOver = false;
+            Clock.Stop();
+            
+            Drone.Image = Properties.Resources.drone;
+
+            scoreCounter = 0;
+
+            batteryLevel = 100;
+            playerPv = 100;
+
+            stopSpawn = 0;
+            batteryCount = 0;
+
+            right = false;
+            left = false;
+            up = false;
+            down = false;
+
+            injectMonster();
+            direction = "unknown";
+            monsterList.Clear();
+            PositionDetector.Start();
+            Clock.Start();
+
+            playerSpeed = 10;
+        }
+    }
+}
