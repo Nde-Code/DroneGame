@@ -14,7 +14,7 @@ Vous pouvez directement cliquer ici: https://github.com/Nde-Code/DroneGame/relea
 
 # Documentation:
 
-## Régles, But et Contrôl:
+## Régles, But et Contrôles:
 
 Le but du jeu est simple, tuer tous les petits monstres avant qu'il ne traverse l'arène, sinon vous perdez du score. Lorsque vous tirez, vous perdez de la batterie que vous devez aller chercher une fois 30% atteint, sans toucher les passerelles sinon vous perdez aussi des vies (et il en va de même pour les sapins), et vous êtes téléporté au contact des monstres qui font très mal ! Une fois que vous n'avez plus de vie, la partie s'arrête, et vous devez appuyer sur la touche "Entrer" pour relancer le jeu. Pour monter, appuyez la le flèche vers le haut de votre clavier, pour descendre, sur la flèche du bas, pour aller à gauche, appuyez sur la flèche vers la gauche, et pour aller à droite, appuyez sur la flèche vers la droite. Vous devez être mobile sinon vous perdez également des vies mais aussi du score et vous êtes téléporté au centre de la carte. 
 
@@ -37,7 +37,7 @@ Les images que j'ai utilisées ne viennent pas toutes de moi, mis appart l'herbe
 
  
 
-- Le drapeau d'arrivée Freepik: https://www.flaticon.com/free-icon/finish-line_3538063?term=finish%20line&page=1&position=62&page=1&position=62&related_id=3538063&origin=search
+- Le drapeau d'arrivée par Freepik: https://www.flaticon.com/free-icon/finish-line_3538063?term=finish%20line&page=1&position=62&page=1&position=62&related_id=3538063&origin=search
 
 
 
@@ -47,7 +47,7 @@ Les images que j'ai utilisées ne viennent pas toutes de moi, mis appart l'herbe
 
 - Mon Favicon est fait avec Logomakr: https://logomakr.com/
 
-## Note:
+# Note:
 
 Ce projet m'a permis d'acquérir une base avec le monde du développement du jeu vidéo, mais aussi du .NET et de Visual Studio. De ce fait je compte bien encore créer des petits jeux dans ce style.
 
