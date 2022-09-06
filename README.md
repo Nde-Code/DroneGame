@@ -12,13 +12,11 @@ Vous pouvez directement cliquer ici: https://github.com/Nde-Code/DroneGame/relea
 
 ![DroneGame](https://github.com/Nde-Code/DroneGame/blob/main/DroneGame.png)
 
-# Documentation:
-
-## Régles, But et Contrôles:
+# Régles, But et Contrôles:
 
 Le but du jeu est simple, tuer tous les petits monstres avant qu'il ne traverse l'arène, sinon vous perdez du score. Lorsque vous tirez, vous perdez de la batterie que vous devez aller chercher une fois 30% atteint, sans toucher les passerelles sinon vous perdez aussi des vies (et il en va de même pour les sapins), et vous êtes téléporté au contact des monstres qui font très mal ! Une fois que vous n'avez plus de vie, la partie s'arrête, et vous devez appuyer sur la touche "Entrer" pour relancer le jeu. Pour monter, appuyez la le flèche vers le haut de votre clavier, pour descendre, sur la flèche du bas, pour aller à gauche, appuyez sur la flèche vers la gauche, et pour aller à droite, appuyez sur la flèche vers la droite. Vous devez être mobile sinon vous perdez également des vies mais aussi du score et vous êtes téléporté au centre de la carte. 
 
-## Informations sur les graphismes:
+# Informations sur les graphismes:
  
 Les images que j'ai utilisées ne viennent pas toutes de moi, mis appart l'herbe et la pierre, le reste est tiré d'un site qui s'appelle Flaticon:
 
