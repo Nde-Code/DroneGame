@@ -6,40 +6,40 @@ namespace DroneGame
 {
     public class Projectiles
     {
-        public int projectilesLeft { get; set; }
-        public int projectilesHight { get; set; }
+        public int projectileLeft { get; set; }
+        public int projectileHight { get; set; }
 
         public int projectilesPower = 20;
 
-        private PictureBox ProjectilesTag = new PictureBox();
-        private Timer projectilesClock = new Timer();
+        private PictureBox projectileElement = new PictureBox();
+        private Timer projectileClock = new Timer();
 
         public void launch(Form form)
         {
-            ProjectilesTag.BackColor = Color.Yellow;
-            ProjectilesTag.Size = new Size(5, 5);
-            ProjectilesTag.Tag = "ProjectilesTag";
-            ProjectilesTag.Name = "Projectiles";
-            ProjectilesTag.Left = projectilesLeft;
-            ProjectilesTag.Top = projectilesHight;
-            ProjectilesTag.BringToFront();
+            projectileElement.BackColor = Color.Yellow;
+            projectileElement.Size = new Size(5, 5);
+            projectileElement.Tag = "projectileElement";
+            projectileElement.Name = "Projectiles";
+            projectileElement.Left = projectileLeft;
+            projectileElement.Top = projectileHight;
+            projectileElement.BringToFront();
 
-            form.Controls.Add(ProjectilesTag);
-            projectilesClock.Interval = projectilesPower;
-            projectilesClock.Tick += new EventHandler(launchTimer);
-            projectilesClock.Start();
+            form.Controls.Add(projectileElement);
+            projectileClock.Interval = projectilesPower;
+            projectileClock.Tick += new EventHandler(launchTimer);
+            projectileClock.Start();
         }
         private void launchTimer(object sender, EventArgs e)
         {
-            ProjectilesTag.Top += projectilesPower;
+            projectileElement.Top += projectilesPower;
 
-            if (ProjectilesTag.Top < 10 || ProjectilesTag.Top > 800)
+            if (projectileElement.Top < 10 || projectileElement.Top > 800)
             {
-                projectilesClock.Stop();
-                projectilesClock.Dispose();
-                ProjectilesTag.Dispose();
-                projectilesClock = null;
-                ProjectilesTag = null;
+                projectileClock.Stop();
+                projectileClock.Dispose();
+                projectileElement.Dispose();
+                projectileClock = null;
+                projectileElement = null;
             }
         }
     }

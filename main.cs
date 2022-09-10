@@ -157,8 +157,8 @@ namespace DroneGame
         {
             batteryLevel -= 5;
             Projectiles projectiles = new Projectiles();
-            projectiles.projectilesLeft = Drone.Left + (Drone.Width / 2);
-            projectiles.projectilesHight = Drone.Top + (Drone.Height / 2);
+            projectiles.projectileLeft = Drone.Left + (Drone.Width / 2);
+            projectiles.projectileHight = Drone.Top + (Drone.Height / 2);
             projectiles.launch(this);
         }
 
@@ -305,11 +305,11 @@ namespace DroneGame
             foreach (Control entityProjectiles in this.Controls)
             {
 
-                if (entityProjectiles is PictureBox && (string)entityProjectiles.Tag == "ProjectilesTag")
+                if (entityProjectiles is PictureBox && (string)entityProjectiles.Tag == "projectileElement")
                 {
                     foreach (Control entityMonster in this.Controls)
                     {
-                        if (entityProjectiles is PictureBox && (string)entityProjectiles.Tag == "ProjectilesTag" && entityMonster is PictureBox && (string)entityMonster.Tag == "Monster")
+                        if (entityProjectiles is PictureBox && (string)entityProjectiles.Tag == "projectileElement" && entityMonster is PictureBox && (string)entityMonster.Tag == "Monster")
                         {
                             if (entityProjectiles.Bounds.IntersectsWith(entityMonster.Bounds))
                             {
@@ -346,7 +346,7 @@ namespace DroneGame
                     }
                 }
 
-                if (entityProjectiles is PictureBox && (string)entityProjectiles.Tag == "ProjectilesTag")
+                if (entityProjectiles is PictureBox && (string)entityProjectiles.Tag == "projectileElement")
                 {
                     if (stoneBlockD.Bounds.IntersectsWith(entityProjectiles.Bounds) || stoneBlockB.Bounds.IntersectsWith(entityProjectiles.Bounds) || stoneBlockC.Bounds.IntersectsWith(entityProjectiles.Bounds) || stoneBlockA.Bounds.IntersectsWith(entityProjectiles.Bounds) || stoneBlockE.Bounds.IntersectsWith(entityProjectiles.Bounds))
                     {
@@ -376,14 +376,14 @@ namespace DroneGame
         private void spawnMonster()
         {
             stopSpawn++;
-            PictureBox monsterPicture = new PictureBox();
-            monsterPicture.Image = Properties.Resources.monster;
-            monsterPicture.Tag = "Monster";
-            monsterPicture.Left = randomNumber.Next(0, this.ClientSize.Width - 200);
-            monsterPicture.Top = 515;
+            PictureBox monster = new PictureBox();
+            monster.Image = Properties.Resources.monster;
+            monster.Tag = "Monster";
+            monster.Left = randomNumber.Next(0, this.ClientSize.Width - 200);
+            monster.Top = 515;
 
-            monsterList.Add(monsterPicture);
-            this.Controls.Add(monsterPicture);
+            monsterList.Add(monster);
+            this.Controls.Add(monster);
         }
 
         private void PositionChecker(object sender, EventArgs e)
@@ -407,7 +407,7 @@ namespace DroneGame
                     ((PictureBox)entityToRemoveOnGameOver).Dispose();
                     monsterList.Clear();
                 }
-                if (entityToRemoveOnGameOver is PictureBox && (string)entityToRemoveOnGameOver.Tag == "ProjectilesTag")
+                if (entityToRemoveOnGameOver is PictureBox && (string)entityToRemoveOnGameOver.Tag == "projectileElement")
                 {
                     this.Controls.Remove(entityToRemoveOnGameOver);
                     ((PictureBox)entityToRemoveOnGameOver).Dispose();
