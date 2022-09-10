@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace DroneGame
 {
-    public class Projectiles
+    public class projectiles
     {
         public int projectileLeft { get; set; }
         public int projectileHight { get; set; }
@@ -18,8 +18,8 @@ namespace DroneGame
         {
             projectileElement.BackColor = Color.Yellow;
             projectileElement.Size = new Size(5, 5);
-            projectileElement.Tag = "projectileElement";
-            projectileElement.Name = "Projectiles";
+            projectileElement.Tag = "ProjectileTag";
+            projectileElement.Name = "ProjectileName";
             projectileElement.Left = projectileLeft;
             projectileElement.Top = projectileHight;
             projectileElement.BringToFront();
