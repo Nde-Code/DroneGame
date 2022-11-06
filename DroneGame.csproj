@@ -135,9 +135,6 @@
     <None Include="Resources\monster.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\rock.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\stone.png" />
   </ItemGroup>
   <ItemGroup>

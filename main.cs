@@ -215,7 +215,7 @@ namespace DroneGame
 
             if (Drone.Left == 100 && Drone.Top == this.ClientSize.Height + 50)
             {
-                Drone.Location = new Point(478, 490);
+                Drone.Location = new Point(478, 426);
             }
 
             foreach (Control entityBar in this.Controls)
@@ -224,7 +224,7 @@ namespace DroneGame
                 {
                     if (Drone.Bounds.IntersectsWith(entityBar.Bounds))
                     {
-                        Drone.Location = new Point(478, 490);
+                        Drone.Location = new Point(478, 426);
                     }
                 }
             }
@@ -235,7 +235,7 @@ namespace DroneGame
                 {
                     if (Drone.Bounds.IntersectsWith(entityText.Bounds))
                     {
-                        Drone.Location = new Point(478, 490);
+                        Drone.Location = new Point(478, 426);
                     }
                 }
             }
@@ -261,7 +261,7 @@ namespace DroneGame
                 {
                     if (Drone.Bounds.IntersectsWith(entityText.Bounds))
                     {
-                        Drone.Location = new Point(478, 490);
+                        Drone.Location = new Point(478, 426);
                     }
                 }
             }
@@ -272,7 +272,7 @@ namespace DroneGame
                 {
                     if (Drone.Bounds.IntersectsWith(entityPatern.Bounds))
                     {
-                        Drone.Location = new Point(478, 490);
+                        Drone.Location = new Point(478, 426);
                         playerPv -= 5;
                     }
                 }
@@ -284,7 +284,7 @@ namespace DroneGame
                 {
                     if (Drone.Bounds.IntersectsWith(entityFlag.Bounds))
                     {
-                        Drone.Location = new Point(478, 490);
+                        Drone.Location = new Point(478, 426);
                         playerPv -= 5;
                     }
                 }
@@ -296,7 +296,7 @@ namespace DroneGame
                 {
                     if (Drone.Bounds.IntersectsWith(entityPineTree.Bounds))
                     {
-                        Drone.Location = new Point(478, 490);
+                        Drone.Location = new Point(478, 426);
                         playerPv -= 5;
                     }
                 }
@@ -342,6 +342,7 @@ namespace DroneGame
 
                     if (Drone.Bounds.IntersectsWith(entityProjectiles.Bounds))
                     {
+                        Drone.Location = new Point(478, 426);
                         playerPv -= 5;
                     }
                 }
@@ -393,7 +394,7 @@ namespace DroneGame
             {
                 playerPv -= 5;
                 scoreCounter -= 5;
-                Drone.Location = new Point(478, 490);
+                Drone.Location = new Point(478, 426);
             }
         }
 
@@ -423,6 +424,7 @@ namespace DroneGame
             }
 
             HealthBar.Value = 0;
+            EnergyBar.Value = 0;
 
             Drone.Image = Properties.Resources.tombstone;
             Drone.Location = new Point(478, 505);
@@ -438,6 +440,7 @@ namespace DroneGame
             Clock.Stop();
             
             Drone.Image = Properties.Resources.drone;
+            Drone.Location = new Point(478, 426);
 
             scoreCounter = 0;
 
