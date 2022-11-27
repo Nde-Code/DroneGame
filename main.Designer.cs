@@ -282,7 +282,7 @@ namespace DroneGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Highlight;
+            this.BackColor = System.Drawing.Color.RoyalBlue;
             this.ClientSize = new System.Drawing.Size(1283, 753);
             this.Controls.Add(this.pineTree6);
             this.Controls.Add(this.pineTree5);

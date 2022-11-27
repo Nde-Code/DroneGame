@@ -87,7 +87,7 @@ namespace DroneGame
                 down = false;
                 direction = "up";
             }
-            if (e.KeyCode == Keys.Space && batteryLevel >= 30)
+            if (e.KeyCode == Keys.Space && batteryLevel >= 30 && getNumberOfProjectiles() <= 3)
             {
                 shootMonster();
             }
@@ -396,6 +396,23 @@ namespace DroneGame
                 scoreCounter -= 5;
                 Drone.Location = new Point(478, 426);
             }
+        }
+
+        private int getNumberOfProjectiles()
+        {
+
+            int numberOfProjectiles = 0;
+
+            foreach (Control projectilesEntities in this.Controls)
+            {
+                if (projectilesEntities is PictureBox && (string)projectilesEntities.Tag is "ProjectileTag")
+                {
+                    numberOfProjectiles++;
+                }
+            }
+
+            return numberOfProjectiles;
+
         }
 
         private void stopGame()
