@@ -14,7 +14,7 @@ namespace DroneGame
         int playerSpeed = 10;
         int stopSpawn = 0;
         int batteryCount = 0;
-
+        
         int[] posXRandom = {
             720,
             40,
@@ -24,17 +24,18 @@ namespace DroneGame
 
         int[] posYrandom = {
             370,
-            137,
+            132,
             31,
-            252
+            276
         };
 
-        int monsterSpeed = 5;
+        int monsterSpeed = 4;
 
         string direction;
 
         bool right, left, up, down;
         bool gameOver = false;
+        bool hasDynamite = false;
 
         int scoreCounter = 0;
 
@@ -302,6 +303,23 @@ namespace DroneGame
                 }
             }
 
+            foreach (Control entityDynamite in this.Controls)
+            {
+                if (entityDynamite is PictureBox && (string)entityDynamite.Tag == "dynamite")
+                {
+                    if (Drone.Bounds.IntersectsWith(entityDynamite.Bounds))
+                    {
+
+                        hasDynamite = false;
+                        this.Controls.Remove(entityDynamite);
+                        ((PictureBox)entityDynamite).Dispose();
+                        dynamiteCountDown.Stop();
+                        dynamiteSpawnDelay.Start();
+
+                    }
+                }
+            }
+
             foreach (Control entityProjectiles in this.Controls)
             {
 
@@ -330,7 +348,7 @@ namespace DroneGame
                 {
                     entityProjectiles.Left += monsterSpeed;
 
-                    if (entityProjectiles.Left + entityProjectiles.Width > this.ClientSize.Width)
+                    if (entityProjectiles.Bounds.IntersectsWith(Flag.Bounds))
                     {
                         this.Controls.Remove(entityProjectiles);
                         ((PictureBox)entityProjectiles).Dispose();
@@ -372,7 +390,31 @@ namespace DroneGame
                     spawnMonster();
                 }
             }
-        }  
+        }
+
+        private void spawnDynamite()
+        {
+
+            dynamiteSpawnDelay.Stop();
+
+            int rdCoord = randomNumber.Next(0, 3);
+
+            int rdCoordX = posXRandom[rdCoord];
+            int rdCoordY = posYrandom[rdCoord];
+
+            PictureBox dynamitePicture = new PictureBox();
+            dynamitePicture.SizeMode = PictureBoxSizeMode.AutoSize;
+            dynamitePicture.Image = Properties.Resources.dynamite;
+            dynamitePicture.Tag = "dynamite";
+            dynamitePicture.Location = new Point(rdCoordX, rdCoordY);
+
+            hasDynamite = true;
+
+            dynamiteCountDown.Start();
+
+            this.Controls.Add(dynamitePicture);
+
+        }
 
         private void spawnMonster()
         {
@@ -382,7 +424,7 @@ namespace DroneGame
             monster.Image = Properties.Resources.monster;
             monster.Tag = "Monster";
             monster.Left = randomNumber.Next(0, this.ClientSize.Width - 450);
-            monster.Top = 515;
+            monster.Top = 500;
 
             monsterList.Add(monster);
             this.Controls.Add(monster);
@@ -396,6 +438,21 @@ namespace DroneGame
                 scoreCounter -= 5;
                 Drone.Location = new Point(478, 426);
             }
+        }
+
+        private void dynamiteExplode(object sender, EventArgs e)
+        {
+            if (hasDynamite is true) {
+
+                playerPv = 0;
+                scoreCounter = 0;
+
+            } 
+        }
+
+        private void addDynamite(object sender, EventArgs e)
+        {
+            if (hasDynamite is false && batteryLevel > 0 && batteryCount is 0) spawnDynamite();
         }
 
         private int getNumberOfProjectiles()
@@ -437,6 +494,12 @@ namespace DroneGame
                     this.Controls.Remove(entityToRemoveOnGameOver);
                     ((PictureBox)entityToRemoveOnGameOver).Dispose();
                 }
+                if (entityToRemoveOnGameOver is PictureBox && (string)entityToRemoveOnGameOver.Tag == "dynamite")
+                {
+                    hasDynamite = false;
+                    this.Controls.Remove(entityToRemoveOnGameOver);
+                    ((PictureBox)entityToRemoveOnGameOver).Dispose();
+                }
 
             }
 
@@ -448,6 +511,7 @@ namespace DroneGame
             direction = "unknown";
 
             PositionDetector.Stop();
+            dynamiteSpawnDelay.Stop();
 
         }
 
@@ -476,6 +540,7 @@ namespace DroneGame
             direction = "unknown";
             monsterList.Clear();
             PositionDetector.Start();
+            dynamiteSpawnDelay.Start();
             Clock.Start();
 
             playerSpeed = 10;

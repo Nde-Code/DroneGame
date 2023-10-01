@@ -14,7 +14,7 @@ Vous pouvez directement cliquer ici: https://github.com/Nde-Code/DroneGame/relea
 
 # Régles, But et Contrôles:
 
-Le but du jeu est simple, tuer tous les petits monstres avant qu'il ne traverse l'arène, sinon vous perdez du score. Lorsque vous tirez, vous perdez de la batterie que vous devez aller chercher une fois 30% atteint, sans toucher les passerelles sinon vous perdez aussi des vies (et il en va de même pour les sapins), et vous êtes téléporté au contact des monstres qui font très mal ! Une fois que vous n'avez plus de vie, la partie s'arrête, et vous devez appuyer sur la touche "Entrer" pour relancer le jeu. Pour monter, appuyez la le flèche vers le haut de votre clavier, pour descendre, sur la flèche du bas, pour aller à gauche, appuyez sur la flèche vers la gauche, et pour aller à droite, appuyez sur la flèche vers la droite. Vous devez être mobile sinon vous perdez également des vies mais aussi du score et vous êtes téléporté au centre de la carte. 
+Le but du jeu est simple : éliminer tous les petits monstres avant qu'ils ne traversent l'arène, sinon vous perdrez des points. Chaque fois que vous tirez, vous consommez de la batterie, que vous devrez recharger une fois qu'elle atteint 30 %. Faites attention à ne pas toucher les passerelles, car cela vous coûterait des vies (de même pour les sapins), et vous seriez téléporté au milieu des monstres, ce qui peut être très dangereux ! Lorsque vous n'avez plus de vies, la partie prend fin, et vous pouvez appuyer sur la touche "Entrée" pour relancer le jeu. Pour vous déplacer, utilisez les touches fléchées de votre clavier : la flèche vers le haut pour monter, la flèche vers le bas pour descendre, la flèche vers la gauche pour aller à gauche et la flèche vers la droite pour aller à droite. Soyez agile, car l'immobilité vous fera perdre des vies et des points, et vous serez téléporté au centre de la carte. De temps en temps, une bombe apparaît, et vous devez vous dépêcher pour la détruire, sinon votre score retombera à zéro, et la partie prendra fin.
 
 # Informations sur les graphismes:
  
@@ -24,12 +24,13 @@ Les images que j'ai utilisées ne viennent pas toutes de moi, mis appart l'herbe
 
  
 
-- Les monstres par Smashicons: https://www.flaticon.com/free-icon/monster_1236412?term=monster&page=1&position=10&page=1&position=10&related_id=1236412&origin=search
+- Les monstres par Smashicons: https://www.flaticon.com/free-icon/monster_1236448?term=monster&page=1&position=3&origin=search&related_id=1236448
 
  
 
 - La pierre tombale par Freepik: https://www.flaticon.com/free-icon/tombstone_252129?term=tombstone&page=1&position=1&page=1&position=1&related_id=252129&origin=search
  
+
 
 - La batterie par Freepik: https://www.flaticon.com/free-icon/accumulator_3520741?term=accumulator&page=1&position=17&page=1&position=17&related_id=3520741&origin=search
 
@@ -44,6 +45,10 @@ Les images que j'ai utilisées ne viennent pas toutes de moi, mis appart l'herbe
 
 
 - Mon Favicon est fait avec Logomakr: https://logomakr.com/
+
+
+
+- La dynamite par Freepik: https://www.flaticon.com/free-icon/bomb_2716632?term=dynamite&page=1&position=22&origin=search&related_id=2716632
 
 # Note:
 

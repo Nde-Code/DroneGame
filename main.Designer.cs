@@ -51,6 +51,8 @@ namespace DroneGame
             this.pineTree4 = new System.Windows.Forms.PictureBox();
             this.pineTree5 = new System.Windows.Forms.PictureBox();
             this.pineTree6 = new System.Windows.Forms.PictureBox();
+            this.dynamiteCountDown = new System.Windows.Forms.Timer(this.components);
+            this.dynamiteSpawnDelay = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pineTree1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grass)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Drone)).BeginInit();
@@ -127,13 +129,13 @@ namespace DroneGame
             // PositionDetector
             // 
             this.PositionDetector.Enabled = true;
-            this.PositionDetector.Interval = 4000;
+            this.PositionDetector.Interval = 6000;
             this.PositionDetector.Tick += new System.EventHandler(this.PositionChecker);
             // 
             // pineTree1
             // 
             this.pineTree1.Image = global::DroneGame.Properties.Resources.pine_tree;
-            this.pineTree1.Location = new System.Drawing.Point(369, 303);
+            this.pineTree1.Location = new System.Drawing.Point(369, 331);
             this.pineTree1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pineTree1.Name = "pineTree1";
             this.pineTree1.Size = new System.Drawing.Size(64, 64);
@@ -166,7 +168,7 @@ namespace DroneGame
             // Flag
             // 
             this.Flag.Image = global::DroneGame.Properties.Resources.finish_line;
-            this.Flag.Location = new System.Drawing.Point(1191, 625);
+            this.Flag.Location = new System.Drawing.Point(1173, 626);
             this.Flag.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Flag.Name = "Flag";
             this.Flag.Size = new System.Drawing.Size(64, 64);
@@ -178,7 +180,7 @@ namespace DroneGame
             // stoneBlockE
             // 
             this.stoneBlockE.BackgroundImage = global::DroneGame.Properties.Resources.stone;
-            this.stoneBlockE.Location = new System.Drawing.Point(1085, 108);
+            this.stoneBlockE.Location = new System.Drawing.Point(1099, 108);
             this.stoneBlockE.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.stoneBlockE.Name = "stoneBlockE";
             this.stoneBlockE.Size = new System.Drawing.Size(169, 79);
@@ -189,10 +191,10 @@ namespace DroneGame
             // stoneBlockA
             // 
             this.stoneBlockA.BackgroundImage = global::DroneGame.Properties.Resources.stone;
-            this.stoneBlockA.Location = new System.Drawing.Point(12, 238);
+            this.stoneBlockA.Location = new System.Drawing.Point(15, 233);
             this.stoneBlockA.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.stoneBlockA.Name = "stoneBlockA";
-            this.stoneBlockA.Size = new System.Drawing.Size(171, 78);
+            this.stoneBlockA.Size = new System.Drawing.Size(171, 79);
             this.stoneBlockA.TabIndex = 24;
             this.stoneBlockA.TabStop = false;
             this.stoneBlockA.Tag = "Patern";
@@ -203,7 +205,7 @@ namespace DroneGame
             this.stoneBlockC.Location = new System.Drawing.Point(719, 217);
             this.stoneBlockC.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.stoneBlockC.Name = "stoneBlockC";
-            this.stoneBlockC.Size = new System.Drawing.Size(257, 80);
+            this.stoneBlockC.Size = new System.Drawing.Size(257, 79);
             this.stoneBlockC.TabIndex = 23;
             this.stoneBlockC.TabStop = false;
             this.stoneBlockC.Tag = "Patern";
@@ -222,10 +224,10 @@ namespace DroneGame
             // stoneBlockB
             // 
             this.stoneBlockB.BackgroundImage = global::DroneGame.Properties.Resources.stone;
-            this.stoneBlockB.Location = new System.Drawing.Point(274, 382);
+            this.stoneBlockB.Location = new System.Drawing.Point(276, 410);
             this.stoneBlockB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.stoneBlockB.Name = "stoneBlockB";
-            this.stoneBlockB.Size = new System.Drawing.Size(342, 80);
+            this.stoneBlockB.Size = new System.Drawing.Size(341, 79);
             this.stoneBlockB.TabIndex = 21;
             this.stoneBlockB.TabStop = false;
             this.stoneBlockB.Tag = "Patern";
@@ -257,7 +259,7 @@ namespace DroneGame
             // pineTree5
             // 
             this.pineTree5.Image = global::DroneGame.Properties.Resources.pine_tree;
-            this.pineTree5.Location = new System.Drawing.Point(460, 303);
+            this.pineTree5.Location = new System.Drawing.Point(460, 331);
             this.pineTree5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pineTree5.Name = "pineTree5";
             this.pineTree5.Size = new System.Drawing.Size(64, 64);
@@ -277,6 +279,17 @@ namespace DroneGame
             this.pineTree6.TabIndex = 35;
             this.pineTree6.TabStop = false;
             this.pineTree6.Tag = "pineTree";
+            // 
+            // dynamiteCountDown
+            // 
+            this.dynamiteCountDown.Interval = 8000;
+            this.dynamiteCountDown.Tick += new System.EventHandler(this.dynamiteExplode);
+            // 
+            // dynamiteSpawnDelay
+            // 
+            this.dynamiteSpawnDelay.Enabled = true;
+            this.dynamiteSpawnDelay.Interval = 8000;
+            this.dynamiteSpawnDelay.Tick += new System.EventHandler(this.addDynamite);
             // 
             // DroneGameWindow
             // 
@@ -351,6 +364,8 @@ namespace DroneGame
         private System.Windows.Forms.PictureBox pineTree4;
         private System.Windows.Forms.PictureBox pineTree5;
         private System.Windows.Forms.PictureBox pineTree6;
+        private System.Windows.Forms.Timer dynamiteCountDown;
+        private System.Windows.Forms.Timer dynamiteSpawnDelay;
     }
 }
 
