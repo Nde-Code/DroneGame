@@ -111,7 +111,7 @@ namespace DroneGame
             battery.Image = Properties.Resources.accumulator;
             battery.SizeMode = PictureBoxSizeMode.AutoSize;
             battery.Location = new Point(posChoiceX, posChoiceY);
-            battery.Tag = "Battery";
+            battery.Tag = "Battery";  
 
             this.Controls.Add(battery);
 
@@ -407,6 +407,8 @@ namespace DroneGame
             dynamitePicture.Image = Properties.Resources.dynamite;
             dynamitePicture.Tag = "dynamite";
             dynamitePicture.Location = new Point(rdCoordX, rdCoordY);
+
+            dynamitePicture.BringToFront();
 
             hasDynamite = true;
 
